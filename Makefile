@@ -14,8 +14,6 @@ SRC = ./strlen.asm \
 
 OBJ = $(SRC:.asm=.o)
 
-CC = gcc
-
 TARGET = libasm.so
 
 all: $(TARGET)
