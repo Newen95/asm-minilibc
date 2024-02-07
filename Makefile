@@ -10,7 +10,8 @@ SRC = ./strlen.asm \
 	./strrchr.asm \
 	./strcmp.asm \
 	./memset.asm \
-	./memcpy.asm
+	./memcpy.asm \
+	./memmove.asm
 
 OBJ = $(SRC:.asm=.o)
 
