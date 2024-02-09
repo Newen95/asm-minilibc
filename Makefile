@@ -13,7 +13,9 @@ SRC = ./strlen.asm \
 	./strcasecmp.asm \
 	./memset.asm \
 	./memcpy.asm \
-	./memmove.asm
+	./memmove.asm \
+	./index.asm \
+	./rindex.asm
 
 OBJ = $(SRC:.asm=.o)
 
