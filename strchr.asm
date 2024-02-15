@@ -3,7 +3,10 @@ section .text
     global strchr
 
 strchr:
-    xor rax, rax
+    mov rax, rdi
+
+    test rdi, rdi
+    je .done
 
 .loop:
     cmp byte [rdi], 0
