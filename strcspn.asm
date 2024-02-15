@@ -2,10 +2,12 @@ section .text
     global strcspn
 
 strcspn:
+    test rdi, rdi
+    jz .done
     xor rax, rax
+    xor rcx, rcx
 
 .loop:
-    xor rcx, rcx
     cmp byte [rdi], 0
     je .done
     jmp .testallchars

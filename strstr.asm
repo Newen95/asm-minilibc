@@ -2,6 +2,9 @@ section .text
     global strstr
 
 strstr:
+    test rdi, rdi
+    jz .done
+
     xor rax, rax
     xor rcx, rcx
 

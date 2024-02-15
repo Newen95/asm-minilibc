@@ -2,6 +2,10 @@ section .text
     global strpbrk
 
 strpbrk:
+    test rdi, rdi
+    jz .done
+    test rsi, rsi
+    jz .done
     xor rax, rax
     xor rcx, rcx
 

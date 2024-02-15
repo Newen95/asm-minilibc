@@ -3,6 +3,10 @@ section .text
     global memset
 
 memset:
+    test rdi, rdi
+    jz .done
+    test rsi, rsi
+    jz .done
     xor rcx, rcx
 
 .loop:

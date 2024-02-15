@@ -14,5 +14,13 @@ isend:
     ret
 
 memmove:
+    test rdi, rdi
+    jz done
+    test rsi, rsi
+    jz done
     xor rcx, rcx
     jmp isend
+
+done:
+    mov rax, rdi
+    ret
