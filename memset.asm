@@ -5,14 +5,14 @@ section .text
 memset:
     test rdi, rdi
     jz .done
-    test rsi, rsi
-    jz .done
     xor rcx, rcx
 
 .loop:
-    cmp rcx, rsi
+    cmp rdx, 0
+    jle .done
+    cmp rcx, rdx
     je .done
-    mov byte [rdi + rcx], dil
+    mov byte [rdi + rcx], sil
     inc rcx
     jmp .loop
 
