@@ -7,25 +7,23 @@ strpbrk:
     test rsi, rsi
     jz .done
     xor rax, rax
-    xor rcx, rcx
 
-.loop:
-    sub rsi, rcx
-    xor rcx, rcx
+.loop_outer:
     cmp byte [rdi], 0
     je .done
-    jmp .testallchars
-    inc rdi
-    jmp .loop
 
+    xor rcx, rcx
 .testallchars:
-    cmp byte sil, 0
-    je .loop
-    cmp byte [rdi], sil
+    cmp byte [rsi + rcx], 0
+    je .next_char
+    cmp byte dil, [rsi + rcx]
     je .find
-    inc rsi
     inc rcx
     jmp .testallchars
+
+.next_char:
+    inc rdi
+    jmp .loop_outer
 
 .find:
     mov rax, rdi
