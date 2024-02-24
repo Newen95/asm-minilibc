@@ -1,6 +1,15 @@
 [BITS 64]
 section .text
     global strrchr
+    global rindex
+
+
+
+rindex:
+    test rdi, rdi
+    je emptystring
+
+    jmp len
 
 strrchr:
     test rdi, rdi
@@ -41,3 +50,4 @@ lenloop:
 endlenloop:
     dec rcx
     jmp strrchrloop
+
