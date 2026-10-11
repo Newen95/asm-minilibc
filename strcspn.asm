@@ -2,34 +2,30 @@ section .text
     global strcspn
 
 strcspn:
+    xor rax, rax
     test rdi, rdi
     jz .done
-    xor rax, rax
-    xor rcx, rcx
+    test rsi, rsi
+    jz .done
 
 .loop:
-    cmp byte [rdi], 0
+    mov r8b, byte [rdi + rax]
+    test r8b, r8b
     je .done
-    jmp .testallchars
+    xor rcx, rcx
 
 .testallchars:
-    cmp byte sil, 0
+    mov r9b, byte [rsi + rcx]
+    test r9b, r9b
     je .notin
-    cmp byte [rdi], sil
-    je .isin
-    inc rsi
+    cmp r8b, r9b
+    je .done
     inc rcx
     jmp .testallchars
 
-.isin:
-    xor r8b, r8b
-    inc rdi
+.notin:
+    inc rax
     jmp .loop
 
-.notin:
-    sub rsi, rcx
-    ret
-
 .done:
-    xor rax, rax
     ret
