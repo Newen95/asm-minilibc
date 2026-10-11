@@ -6,16 +6,16 @@ section .text
 
 
 strchr:
-    mov rax, rdi
+    xor rax, rax
 
     test rdi, rdi
     je .done
 
 .loop:
-    cmp byte [rdi], 0
-    je .done
     cmp byte [rdi], sil
     je .find
+    cmp byte [rdi], 0
+    je .done
     inc rdi
     jmp .loop
 
@@ -24,22 +24,21 @@ strchr:
     ret
 
 .done:
-    xor rax, rax
     ret
 
 
 
 index:
-    mov rax, rdi
+    xor rax, rax
 
     test rdi, rdi
     je .done
 
 .loop:
-    cmp byte [rdi], 0
-    je .done
     cmp byte [rdi], sil
     je .find
+    cmp byte [rdi], 0
+    je .done
     inc rdi
     jmp .loop
 
@@ -48,5 +47,4 @@ index:
     ret
 
 .done:
-    xor rax, rax
     ret
