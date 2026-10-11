@@ -5,37 +5,38 @@ section .text
 strcasecmp:
     xor rcx, rcx
 
-.upcase_al:
+.lowcase_al:
     mov al, [rdi + rcx]
-    mov bl, [rsi + rcx]
+    mov r8b, [rsi + rcx]
 
-    cmp al, 'a'
-    jb .upcase_bl
-    cmp al, 'z'
-    ja .upcase_bl
-    sub al, 32
+    cmp al, 'A'
+    jb .lowcase_r8b
+    cmp al, 'Z'
+    ja .lowcase_r8b
+    add al, 32
 
-.upcase_bl:
-    cmp bl, 'a'
+.lowcase_r8b:
+    cmp r8b, 'A'
     jb .check
-    cmp bl, 'z'
+    cmp r8b, 'Z'
     ja .check
-    sub bl, 32
+    add r8b, 32
 
 .check:
-    cmp al, bl
+    cmp al, r8b
     jne .different
     cmp al, 0
     je .done
-    cmp bl, 0
+    cmp r8b, 0
     je .done
 
     inc rcx
-    jmp .upcase_al
+    jmp .lowcase_al
 
 .different:
-    sub al, bl
-    movsx rax, al
+    movzx eax, al
+    movzx r8d, r8b
+    sub eax, r8d
     ret
 
 .done:

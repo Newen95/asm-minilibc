@@ -7,12 +7,12 @@ strncmp:
 
 .loop:
     mov al, [rdi + rcx]
-    mov bl, [rsi + rcx]
+    mov r8b, [rsi + rcx]
 
     cmp rdx, rcx
     je .done
 
-    cmp al, bl
+    cmp al, r8b
     jne .different
 
     cmp al, 0
@@ -22,8 +22,9 @@ strncmp:
     jmp .loop
 
 .different:
-    sub al, bl
-    movsx rax, al
+    movzx eax, al
+    movzx r8d, r8b
+    sub eax, r8d
     ret
 
 .done:
