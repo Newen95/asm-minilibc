@@ -2,40 +2,33 @@ section .text
     global strstr
 
 strstr:
+    xor rax, rax
     test rdi, rdi
     jz .done
-
-    xor rax, rax
-    xor rcx, rcx
+    test rsi, rsi
+    jz .done
 
 .loop:
-    cmp byte [rdi], 0
-    je .done
-    cmp byte [rdi], sil
-    je .isstr
-    inc rdi
-    jmp .loop
-
-.isstr:
-    mov rax, rdi
     xor rcx, rcx
-    jmp .loopstr
 
 .loopstr:
-    inc rdi
-    inc rsi
-    inc rcx
-    cmp byte [rsi], 0
+    mov r8b, byte [rsi + rcx]
+    test r8b, r8b
     je .find
-    cmp byte [rdi], sil
-    je .loopstr
-    sub rdi, rcx
-    mov rsi, rax
+    cmp byte [rdi + rcx], r8b
+    jne .next
+    inc rcx
+    jmp .loopstr
+
+.next:
+    cmp byte [rdi], 0
+    je .done
+    inc rdi
     jmp .loop
 
 .find:
+    mov rax, rdi
     ret
 
 .done:
-    xor rax, rax
     ret
