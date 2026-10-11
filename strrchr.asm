@@ -18,13 +18,12 @@ strrchr:
     jmp len
 
 decrease:
+    test rcx, rcx
+    je emptystring
     dec rcx
 
 strrchrloop:
-    mov al, byte [rdi + rcx]
-    cmp al, 0
-    je emptystring
-    cmp al, sil
+    cmp byte [rdi + rcx], sil
     jne decrease
     mov rax, rdi
     add rax, rcx
@@ -48,6 +47,4 @@ lenloop:
     jmp lenloop
 
 endlenloop:
-    dec rcx
     jmp strrchrloop
-
