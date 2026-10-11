@@ -25,7 +25,7 @@ TARGET = libasm.so
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	ld -shared -o $(TARGET) $(OBJ)
+	ld -shared -z noexecstack -o $(TARGET) $(OBJ)
 
 %.o: %.asm
 	nasm -f elf64 $< -o $@
